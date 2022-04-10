@@ -18,25 +18,46 @@ function ready() {
 }
 
 function validateForm() {
-    if (nameValid == true) {
-        log('name valid true')
+    if (nameValid & cpfValid) {
+        trueForm()
     }
-
-    //if (nameValid == true & cpfValid == true & emailValid == true & phoneValid == true & gitHubProfileValid == true) {
-    //    trueForm()
-    //}
+    else {
+        log('form false')
+    }
 }
 
 function validateCpf() {
     var formCpf = document.getElementById('cpf').value
+    const cpfNumbers = formCpf.split('').map((item) => parseInt(item))
+
+    let firstVerifierSum = 0
+    let secondVerifierSum = 0
+
+    for (let i = 0, multiplier = 10; i < 9; i++, multiplier--) {
+        firstVerifierSum += cpfNumbers[i] * multiplier
+    }
+
+    if ((firstVerifierSum * 10) % 11 == formCpf[9]) {
+        for (let i = 0, multiplier = 11; i < 10; i++, multiplier--) {
+            secondVerifierSum += formCpf[i] * multiplier
+        }
+
+        if ((secondVerifierSum * 10) % 11 == formCpf[10]) {
+            return cpfValid = true
+        }
+    }
+    else {
+        alert('CPF inválido')
+    }
 }
 
 function validateName(formName) {
 
     if (!formName.value == '') {
-        log('name true')
-
         return nameValid = true
+    }
+    else {
+        alert('Nome não pode ficar em branco')
     }
 }
 
