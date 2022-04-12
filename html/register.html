@@ -19,16 +19,36 @@
                 <h1>Cadastro</h1>
                 <p>Por favor, preencha os dados para criar uma conta.</p>
                 <label for="name">Nome</label>
-                <input type="text" name="name" id="name" placeholder="Nome" required onblur="validateName(this)">
+                <input type="text" name="name" id="name" placeholder="Nome" required>
+                <br>
                 <label for="cpf">CPF</label>
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" required onblur="validateCpf()">
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" required>
+                <br>
                 <label for="email">E-mail</label>
                 <input type="text" name="email" id="email" placeholder="E-mail" required>
+                <br>
                 <label for="phone">Telefone</label>
                 <input type="text" name="phone" id="phone" placeholder="(XX) XXXXX-XXXX" required>
-                <label for="gitHubProfile">Perfil do GitHub</label>
-                <input type="text" name="gitHubProfile" id="gitHubProfile" placeholder="github.com/user" required>
-                <button class="register">Cadastrar</button>
+                <br>
+                <div class="contribute">
+                    <p>Contribuir como:</p>
+                    <input class="inputRadio" type="radio" name="contributeRadio" id="sower" required>
+                    <label for="sower">Semeador</label>
+                    <br>
+                    <input class="inputRadio" type="radio" name="contributeRadio" id="provider">
+                    <label for="provider">Fornecedor</label>
+                    <br>
+                    <input class="inputRadio" type="radio" name="contributeRadio" id="programmer">
+                    <label for="programmer">Programador</label>
+                    <div class="reveal-if-active">
+                        <label for="github">Link para o perfil no GitHub</label>
+                        <br>
+                        <input type="text" name="github" id="github" placeholder="github.com/user">
+                    </div>
+                </div>
+                <div class="registerDiv">
+                    <button class="register">Cadastrar</button>
+                </div>
             </form>
         </div>
     </div>

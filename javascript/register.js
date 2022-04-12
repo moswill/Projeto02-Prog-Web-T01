@@ -2,11 +2,11 @@ if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
 }
 else {
-    var nameValid = false
-    var cpfValid = false
-    var emailValid = false
-    var phoneValid = false
-    var gitHubProfileValid = false
+    var nameValid
+    var cpfValid
+    var emailValid
+    var phoneValid
+    var contributeValid
 
     ready()
 }
@@ -18,7 +18,11 @@ function ready() {
 }
 
 function validateForm() {
-    if (nameValid & cpfValid) {
+
+    //validateName()
+    validateGithub()
+
+    if (nameValid & cpfValid & emailValid & phoneValid & contributeValid) {
         trueForm()
     }
     else {
@@ -26,9 +30,17 @@ function validateForm() {
     }
 }
 
+function validateName() {
+    const formName = document.getElementById('name')
+
+    if (!formName.value == '') {
+        return nameValid = true
+    }
+}
+
 function validateCpf() {
-    var formCpf = document.getElementById('cpf').value
-    const cpfNumbers = formCpf.split('').map((item) => parseInt(item))
+    const formCpf = document.getElementById('cpf')
+    const cpfNumbers = formCpf.value.split('').map((item) => parseInt(item))
 
     let firstVerifierSum = 0
     let secondVerifierSum = 0
@@ -37,58 +49,53 @@ function validateCpf() {
         firstVerifierSum += cpfNumbers[i] * multiplier
     }
 
-    if ((firstVerifierSum * 10) % 11 == formCpf[9]) {
+    if ((firstVerifierSum * 10) % 11 == formCpf.value[9]) {
         for (let i = 0, multiplier = 11; i < 10; i++, multiplier--) {
-            secondVerifierSum += formCpf[i] * multiplier
+            secondVerifierSum += formCpf.value[i] * multiplier
         }
 
-        if ((secondVerifierSum * 10) % 11 == formCpf[10]) {
+        if ((secondVerifierSum * 10) % 11 == formCpf.value[10]) {
             return cpfValid = true
         }
     }
-    else {
-        alert('CPF inválido')
+}
+
+function validateEmail() {
+    const formEmail = document.getElementById('email')
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formEmail.value)) {
+        return emailValid = true
     }
 }
 
-function validateName(formName) {
+function validatePhone() {
+    const formPhone = document.getElementById('phone')
 
-    if (!formName.value == '') {
-        return nameValid = true
+    if (/(\(?\d{2}\)?\s?)(\d{5}\-?\d{4})/.test(formPhone.value)) {
+        return phoneValid = true
     }
-    else {
-        alert('Nome não pode ficar em branco')
+}
+
+function validateContribute() {
+    const formGithub = document.getElementById('github')
+    const formRadio = document.getElementsByClassName('inputRadio')
+
+    switch (formRadio[2].checked) {
+        case true:
+            formGithub.required = true
+            if (/^github\.com\/[\w]+$/.test(formGithub.value)) {
+                return contributeValid = true
+            }
+        break
+        case false:
+            if (!formRadio[0].checked & !formRadio[1].checked) {
+                return
+            }
+            else {
+                return contributeValid = true
+            }
     }
 }
 
 function trueForm() {
-    log('true form')
+    window.open('registered.html')
 }
-
-function log(a) {
-    console.log(a)
-}
-
-/*
-cpf = input('Digite o seu CPF, por favor (sem pontos e traços): ')
-cpf_lista = list(cpf)
-digito = 0
-multiplicador = 10
-soma_primeiro_verificador = 0
-soma_segundo_verificador = 0
-while digito < 9:
-    soma_primeiro_verificador += int(cpf_lista[digito]) * multiplicador
-    digito += 1
-    multiplicador -= 1
-digito = 0
-multiplicador = 11
-if (soma_primeiro_verificador * 10) % 11 == int(cpf_lista[9]):
-    while digito < 10:
-        soma_segundo_verificador += int(cpf_lista[digito]) * multiplicador
-        digito += 1
-        multiplicador -= 1
-    if (soma_segundo_verificador * 10) % 11 == int(cpf_lista[10]):
-        print('CPF válido.\nObrigado')
-else:
-    print('CPF inválido.')
-*/

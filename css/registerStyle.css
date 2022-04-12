@@ -24,10 +24,29 @@ body {
 
 .modal-content {
     position: relative;
-    width: 90%;
-    height: 60%;
+    width: 40%;
+    height: 75%;
     padding: 5px;
     background-color: rgb(29, 134, 60);
     border-radius: 5px;
     text-align: center;
+}
+
+.reveal-if-active {
+    display: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: 0.5s;
+}
+
+input[type="radio"]:last-of-type:checked ~ .reveal-if-active {
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+    transform: scale(1);
+}
+
+.register {
+    position: relative;
+    cursor: pointer;
 }
