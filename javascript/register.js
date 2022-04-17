@@ -19,14 +19,17 @@ function ready() {
 
 function validateForm() {
 
-    //validateName()
-    validateGithub()
+    validateName()
+    validateCpf()
+    validateEmail()
+    validatePhone()
+    validateContribute()
 
     if (nameValid & cpfValid & emailValid & phoneValid & contributeValid) {
         trueForm()
     }
     else {
-        log('form false')
+        alert('form false')
     }
 }
 
@@ -97,5 +100,5 @@ function validateContribute() {
 }
 
 function trueForm() {
-    window.open('registered.html')
+    window.open('registered.html', "_self")
 }
