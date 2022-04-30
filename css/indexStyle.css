@@ -15,12 +15,14 @@ body {
 .about {
     width: 80%;
     height: 70vh;
-    padding: 25px;
+    padding: 25px 50px;
     background-color: #34cf3e;
     border-radius: 5px;
 }
 
 .eco {
+    position: relative;
+    top: 4px;
     font-size: 26pt;
     color: #2aad32;
 }
@@ -28,6 +30,11 @@ body {
 .about h2 {
     font-size: 24pt;
     margin-bottom: 15px;
+}
+
+.about p {
+    text-indent: 15px;
+    margin-bottom: 10px;
 }
 
 .register {
